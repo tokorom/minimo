@@ -1,0 +1,7 @@
+.widget-works {
+  .sidebar &.sep-after {
+    &:after {
+      border-bottom-color: $color__accent;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.entry-works {
+  .container > div {
+    margin-top: 0.5em;
+
+    &:first-child {
+      margin-top: 2.5em;
+    }
+  }
+}
