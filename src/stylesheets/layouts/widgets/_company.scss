@@ -1,0 +1,29 @@
+.widget-company {
+  .logo {
+    max-width: 8em;
+    margin-top: 1.0em;
+    margin-bottom: 1.0em;
+    margin-left: 1.0em;
+    margin-right: 1.0em;
+
+    a {
+      display: block;
+      line-height: 0;
+    }
+
+    .sidebar & {
+      margin-left: auto;
+    }
+  }
+
+  .site-title {
+    margin-bottom: 0;
+    @include font-size(1.75);
+  }
+
+  .sidebar &.sep-after {
+    &:after {
+      border-bottom-color: $color__accent;
+    }
+  }
+}
