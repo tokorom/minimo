@@ -19,6 +19,15 @@
   }
 }
 
+.cover-normal {
+  padding: 0;
+  max-height: $max-height__cover-normal;
+
+  img {
+    max-height: $max-height__cover-normal;
+  }
+}
+
 .cover-wide {
   padding: 0;
   max-width: $max-width__cover-wide;
