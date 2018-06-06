@@ -7,6 +7,7 @@
   }
 
   a {
+    color: $color__link-content;
     border-bottom: 0.125em dashed $color__grey;
 
     &:focus,
@@ -15,6 +16,7 @@
     }
 
     &.footnote-return {
+      color: $color__link-content-hover;
       border-bottom: none;
     }
   }
