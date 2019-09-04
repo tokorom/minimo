@@ -1,8 +1,9 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
+const cssnano = require('cssnano')
 const AssetsWebpackPlugin = require('assets-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 
 const assetsManifest = new AssetsWebpackPlugin({
   filename: 'assets.json',
@@ -19,22 +20,27 @@ const assetsManifest = new AssetsWebpackPlugin({
   }
 })
 
-const extractCSS = new ExtractTextWebpackPlugin({
-  filename: getPath =>
-    getPath('css/[name].[contenthash:8].css').replace('css', '../css')
+const extractCSS = new MiniCSSExtractPlugin({
+  filename: '../css/[name].[contenthash:8].css'
 })
 
-const cleanBuild = new CleanWebpackPlugin([
-  'static/assets/css/*',
-  'static/assets/js/*'
-])
+const cleanBuild = new CleanWebpackPlugin({
+  cleanOnceBeforeBuildPatterns: [
+    path.resolve('static/assets/css/*'),
+    path.resolve('static/assets/js/*')
+  ]
+})
 
 const node_env = process.env.NODE_ENV
 
 const config = {
   mode: node_env === 'production' ? 'production' : 'development',
   entry: {
-    main: path.join(__dirname, 'src/scripts', 'main.js')
+    main: path.join(__dirname, 'src/scripts', 'main.js'),
+    algolia_search: path.join(__dirname, 'src/scripts/search', 'algolia.js'),
+    fuse_search: path.join(__dirname, 'src/scripts/search', 'fuse.js'),
+    lunr_search: path.join(__dirname, 'src/scripts/search', 'lunr.js'),
+    rtl: path.join(__dirname, 'src/stylesheets', 'rtl.scss')
   },
   output: {
     filename: '[name].[chunkhash:8].js',
@@ -49,51 +55,40 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
-            plugins: ['syntax-dynamic-import']
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-syntax-dynamic-import']
           }
         }
       },
       {
         test: /\.scss$/,
-        include: path.resolve(__dirname, 'src/stylesheets'),
-        use: extractCSS.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                minimize:
-                  'production' === node_env
-                    ? {
-                        discardComments: {
-                          removeAllButFirst: true
-                        }
-                      }
-                    : false
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [
-                  autoprefixer({
-                    browsers: ['> 1%', 'last 2 versions']
-                  })
-                ]
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [
-                  path.resolve('node_modules/normalize.css'),
-                  path.resolve('node_modules/hamburgers/_sass/hamburgers')
-                ]
-              }
+        include: [path.resolve(__dirname, 'src/stylesheets')],
+        use: [
+          MiniCSSExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
             }
-          ]
-        })
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                autoprefixer(),
+                'production' === node_env
+                  ? cssnano({
+                      preset: [
+                        'default',
+                        { discardComments: { removeAllButFirst: true } }
+                      ]
+                    })
+                  : null
+              ].filter(Boolean)
+            }
+          },
+          'sass-loader'
+        ]
       }
     ]
   },

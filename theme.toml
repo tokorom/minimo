@@ -11,25 +11,34 @@ tags = [
 ]
 features = [
   "accessibility",
+  "algolia",
   "analytics",
+  "breadcrumbs",
   "comments",
   "cover-image",
-  "double-column",
+  "disqus",
   "entry-navigation",
   "favicon",
+  "fuse.js",
+  "isso",
+  "lunr.js",
   "multilingual",
   "multi-author",
   "opengraph",
   "pagination",
+  "rtl",
+  "search",
   "shortcodes",
   "sidebar",
   "single-column",
   "social-menu",
+  "staticman",
   "syntax-highlighting",
   "table-of-contents",
+  "utterances",
   "widgets"
 ]
-min_version = 0.32
+min_version = 0.55
 
 [author]
   name = "Munif Tanjim"

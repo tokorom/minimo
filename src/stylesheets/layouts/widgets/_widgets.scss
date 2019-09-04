@@ -21,11 +21,23 @@
       margin-bottom: 0.5em;
       @include font-size($font-size__h5);
     }
+
+    .container {
+      padding: 0;
+    }
+  }
+}
+
+.header-widgets {
+  .main-menu + & {
+    margin-top: 1em;
   }
 }
 
 @import 'about';
+@import 'breadcrumbs';
 @import 'recent-posts';
+@import 'search';
 @import 'social-menu';
 @import 'taxonomy-cloud';
 @import 'company';

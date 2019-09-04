@@ -13,6 +13,7 @@
     &:focus,
     &:hover {
       border-bottom-color: $color__accent;
+      border-bottom-color: var(--color-accent);
     }
 
     &.footnote-return {

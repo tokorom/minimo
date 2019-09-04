@@ -1,6 +1,6 @@
 ---
 date: 2018-02-07T18:30:00+06:00
-lastmod: 2018-02-12T23:40:00+06:00
+lastmod: 2018-11-21T19:00:00+06:00
 title: Widgets
 authors: ["muniftanjim"]
 categories:
@@ -10,6 +10,9 @@ tags:
   - widgets
 slug: widgets
 toc: true
+menu:
+  sidebar:
+    parent: docs
 ---
 Minimo supports _**Widgets**_ that you can place on specific _**Widget Areas**_.
 
@@ -20,9 +23,12 @@ Minimo has the following built-in Widgets:
   Name             |  Slug
  ----------------- | -----------------
  1. About          | `about`
- 2. Recent Posts   | `recent_posts`
- 3. Social Menu    | `social_menu`
- 4. Taxonomy Cloud | `taxonomy_cloud`
+ 2. Breadcrumbs    | `breadcrumbs`
+ 3. Recent Posts   | `recent_posts`
+ 4. Search         | `search`
+ 5. Sidebar Menu   | `sidebar_menu`
+ 6. Social Menu    | `social_menu`
+ 7. Taxonomy Cloud | `taxonomy_cloud`
 
 ### Widget Configuration Options
 
@@ -38,6 +44,14 @@ Here are the configuration options available for the Widgets:
   - `logo` [`String`]: path/url of Logo  
     _default: `"/images/logo.png"`_
 
+#### Widget: Breadcrumbs
+
+- `breadcrumbs` [`Map`]:
+  - `separator` [`String`]: Breadcrumb separator  
+     _default: `"/"`_
+  - `excludeParents` [`Array` of `String`s]:  Types of parents to exclude  
+    _default: `["page"]`_
+
 #### Widget: Recent Posts
 
 - `recent_posts` [`Map`]:
@@ -47,6 +61,20 @@ Here are the configuration options available for the Widgets:
     _default: `5`_
   - `excludeTypes` [`Array` of `String`s]:  Types of posts to exclude  
     _default: `["page"]`_
+
+#### Widget: Search
+
+- `search` [`Map`]:
+  - `title` [`String`]: Title  
+    _default: `"Search"`_
+
+#### Widget: Sidebar Menu
+
+- `sidebar_menu` [`Map`]:
+  - `title` [`String`]: Title  
+    _default: `""`_
+  - `mirror` [`String`]: Name of menu to mirror (e.g. `"main"`)  
+    _default: `""`_
 
 #### Widget: Social Menu
 
@@ -69,15 +97,19 @@ Here are the configuration options available for the Widgets:
 
   Name    |  Slug
  -------- | ----------
+ Header   | `header`
  Homepage | `homepage`
  Sidebar  | `sidebar`
+ Footer   | `footer`
 
 You can add Widgets to Widget Areas from your **`config.toml`** file:
 
 ```toml
 [params.widgets]
+header = ["breadcrumbs"]
 homepage = ["recent_posts"]
 sidebar = ["about","taxonomy_cloud"]
+footer = ["social_menu"]
 ```
 
 The syntax for adding Widgets to Widget Areas is:

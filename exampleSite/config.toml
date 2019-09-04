@@ -43,17 +43,22 @@ dateFormat = "2006, Jan 02"
 listDateFormat = "2006, Jan 02"
 archiveDateFormat = "Jan 02"
 hideEntryNavigation = ["page"] # boolean / array of sections
-hideSocialMenu = false
+hideEntryMeta = ["page"] # boolean / array of sections
 showReadingTime = true
+showLastmod = true
 taxonomyCloudShuffle = true
+accentColor = "#ffcd00"
+hideMainMenu = false
+rtl = false
 
 [params.sidebar]
 enable = true
-sticky = true
 
 [params.widgets]
+header = ["breadcrumbs"]
 homepage = ["recent_posts"]
-sidebar = ["about","taxonomy_cloud"]
+sidebar = ["about","search","sidebar_menu","taxonomy_cloud"]
+footer = ["social_menu"]
 
 [params.opengraph.facebook]
 admins = [] # array of Facebook IDs
@@ -78,13 +83,45 @@ linkedin = "muniftanjim"
 twitter = "MunifTanjim"
 telegram = "MunifTanjim"
 google_scholar = "qc6CJjYAAAAJ"
+youtube = "UCT-U0rNerYxItGcuoPX-WYA"
 
-[params.social.config]
-platforms = ["github","facebook","twitter","instagram","email","codepen","gitlab","linkedin","telegram","google_scholar"]
+[params.comments]
+enable = false
+
+# Isso: https://posativ.org/isso/
+[params.comments.isso]
+enable = false
+scriptSrc = "" # "https://isso.example.com/js/embed.min.js"
+dataAttrs = "" # "data-isso='https://isso.example.com' data-isso-require-author='true'"
+
+[params.comments.staticman]
+enable = true
+apiEndpoint = "https://api.staticman.net/v2/entry"
+maxDepth = 2
+username = "MunifTanjim"
+repository = "minimo"
+
+# Utterances: https://utteranc.es
+[params.comments.utterances]
+enable = false
+issueTerm = "pathname" # pathname / url / title
+
+[params.comments.utterances.github]
+username = "MunifTanjim"
+repository = "minimo"
+
+[params.search]
+client = "fuse" # algolia / fuse / lunr
+
+[params.search.algolia]
+appId = ""
+indexName = ""
+searchApiKey = ""
 
 [taxonomies]
 author = "authors"
 category = "categories"
+series = "series"
 tag = "tags"
 
 [permalinks]
