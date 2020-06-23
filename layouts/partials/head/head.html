@@ -1,7 +1,7 @@
 <head>
   {{ partial "head/meta" . }}
   <title>{{ partial "data/title" . }}</title>
-  <link rel='canonical' href='{{ .Permalink }}'>
+  <link rel='canonical' href='{{ if isset .Params "canonical" }}{{ .Params.canonical }}{{ .RelPermalink }}{{ else }}{{ .Permalink }}{{ end }}'>
   {{ with .OutputFormats.Get "RSS" }}
     <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
   {{ end }}
