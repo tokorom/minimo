@@ -1,6 +1,6 @@
 <div class='container entry-content'>
   {{ if lt 100 (sub (int (time.Now.Format "200601")) (int (.Lastmod.Format "200601"))) }}
-  <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
+  <div class='box box-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   {{ end }}
 
   {{ .Content }}
